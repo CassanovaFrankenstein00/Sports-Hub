@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Sports_Hub.Data;
+
 namespace Sports_Hub
 {
     public class Program
@@ -8,6 +11,11 @@ namespace Sports_Hub
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Connect sports Hub to SQl server
+            builder.Services.AddDbContext<SportsHubContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("SportsHubConnection")));
 
             var app = builder.Build();
 
